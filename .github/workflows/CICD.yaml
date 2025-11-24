@@ -12,7 +12,7 @@ jobs:
          uses: actions/setup-java@v3
          with:
           distribution: 'temurin'
-          java-version: '17'   # Updated Java version
+          java-version: '11'   # Updated Java version
        - name: maven validate
          run: mvn validate
        - name: maven compile
