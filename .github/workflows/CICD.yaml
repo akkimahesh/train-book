@@ -1,4 +1,4 @@
-name:  CI/CD pipelie to deploy to tomcat
+name:  CI/CD pipelie to Deploy Into ECS
 on:
   push:
     branches: master
