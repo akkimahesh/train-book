@@ -1,14 +1,14 @@
-# Use a base image with Java installed
-FROM openjdk:17-jdk-slim
+# Use a Tomcat base image with JDK 17
+FROM tomcat:9.0-jdk17
 
-# Set the working directory inside the container
-WORKDIR /app
+# Optional: clean default ROOT app
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy the packaged JAR file into the container
-COPY target/your-application.jar /app/TrainBook-1.0.0-SNAPSHOT.war
+# Copy your WAR as ROOT.war so it is available at http://host:8080/
+COPY target/TrainBook-1.0.0-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
 
-# Expose the port your application listens on (if applicable, e.g., for a web app)
+# Expose Tomcat port
 EXPOSE 8080
 
-# Define the command to run your application when the container starts
-ENTRYPOINT ["java", "-war", "TrainBook-1.0.0-SNAPSHOT.war"]
+# Start Tomcat
+CMD ["catalina.sh", "run"]
