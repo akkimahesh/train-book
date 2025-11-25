@@ -1,7 +1,7 @@
-name:  CI/CD pipelie to deploy to tomcat
+name:  CI/CD pipelie to Deploy Into ECS
 on:
   push:
-    branches: master
+    branches: main
 jobs:
    build-deploy:
      runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
          uses: actions/setup-java@v3
          with:
           distribution: 'temurin'
-          java-version: '17'   # Updated Java version
+          java-version: '11'   # Updated Java version
        - name: maven validate
          run: mvn validate
        - name: maven compile
@@ -21,12 +21,6 @@ jobs:
          run: mvn test
        - name: maven package
          run: mvn package
-       - name: sonar code quality 
-         run: |
-          mvn clean verify sonar:sonar \
-            -Dsonar.projectKey=train-ticket \
-            -Dsonar.host.url="${{ secrets.SONAR_HOST }}" \
-            -Dsonar.login="${{ secrets.SONAR_TOKEN }}"
 
       
          
